@@ -1,0 +1,16 @@
+[Unit]
+Description=Apple News Monitoring & Daily Push Agent
+After=network.target
+
+[Service]
+Type=simple
+User=%u
+WorkingDirectory=%h/apple-news-agent
+ExecStart=%h/.local/bin/python3 %h/apple-news-agent/agent.py
+StandardOutput=append:%h/apple-news-agent/logs/apple_news_agent.log
+StandardError=append:%h/apple-news-agent/logs/apple_news_agent.log
+Restart=always
+RestartSec=300
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  apple-news-agent:
+    build: .
+    container_name: apple-news-agent
+    environment:
+      # Copy values from your .env file
+      NEWSAPI_KEY: ${NEWSAPI_KEY:-}
+      TWITTER_BEARER_TOKEN: ${TWITTER_BEARER_TOKEN:-}
+      EMAIL_SENDER: ${EMAIL_SENDER:-}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD:-}
+      SMTP_SERVER: ${SMTP_SERVER:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      EMAIL_RECIPIENTS: ${EMAIL_RECIPIENTS:-}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL:-}
+      SCHEDULE_TIME: ${SCHEDULE_TIME:-09:00}
+      TIMEZONE: ${TIMEZONE:-UTC}
+    volumes:
+      # Mount for persistent logs
+      - ./logs:/app/logs
+      # Mount briefing output
+      - ./output:/app/output
+    restart: unless-stopped
+    # Run on schedule in background
+    command: [""]
+    # For one-time execution:
+    # command: ["--once"]
+
+# Build: docker-compose build
+# Run daemon: docker-compose up -d
+# View logs: docker-compose logs -f
+# Run once: docker-compose run --rm apple-news-agent --once
