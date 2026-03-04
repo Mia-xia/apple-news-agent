@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import requests
 import logging
+import os
 from typing import List
 
 logger = logging.getLogger(__name__)
@@ -113,6 +114,9 @@ class FileDelivery:
             filename: Output filename
         """
         try:
+            parent = os.path.dirname(filename)
+            if parent:
+                os.makedirs(parent, exist_ok=True)
             with open(filename, "w") as f:
                 f.write(content)
             logger.info(f"Daily briefing saved to {filename}")

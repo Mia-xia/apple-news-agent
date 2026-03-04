@@ -28,7 +28,10 @@
 - `formatter.py`：中文热点文案生成与格式控制
 - `delivery.py`：文件/邮件/Slack 投递
 - `config.py`：新闻源与关键词配置
-- `test_briefing.md`：测试输出文件
+- `docs/`：项目文档（API、快速开始、进阶说明）
+- `deploy/`：部署文件（`docker-compose.yml`、`apple-news-agent.service`）
+- `logs/`：运行日志目录
+- `outputs/`：简报输出目录
 
 ## 快速开始
 
@@ -53,8 +56,8 @@ python3 agent.py --once
 
 默认输出文件：
 
-- `test_briefing.md`（测试模式）
-- `apple_news_brief.md`（正式模式）
+- `outputs/test_briefing.md`（测试模式）
+- `outputs/apple_news_brief.md`（正式模式）
 
 ## 说明
 

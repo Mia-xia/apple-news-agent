@@ -9,6 +9,7 @@ and delivers a daily briefing via email.
 import logging
 import schedule
 import time
+import os
 from datetime import datetime, timedelta
 from typing import List
 import pytz
@@ -25,11 +26,14 @@ from formatter import NewsFormatter
 from delivery import EmailDelivery, SlackDelivery, FileDelivery
 
 # Configure logging
+os.makedirs("logs", exist_ok=True)
+os.makedirs("outputs", exist_ok=True)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('apple_news_agent.log'),
+        logging.FileHandler('logs/apple_news_agent.log'),
         logging.StreamHandler()
     ]
 )
@@ -161,7 +165,7 @@ class AppleNewsAgent:
                 )
             
             # Save to file
-            self.file_delivery.save(markdown, "apple_news_brief.md")
+            self.file_delivery.save(markdown, "outputs/apple_news_brief.md")
             
             # Optionally send to Slack
             if self.slack_delivery:
@@ -221,8 +225,8 @@ def main():
         markdown, html, json_data = agent.generate_daily_briefing(items)
         
         # Save test output
-        agent.file_delivery.save(markdown, "test_briefing.md")
-        logger.info(f"Test briefing saved to test_briefing.md ({len(items)} items)")
+        agent.file_delivery.save(markdown, "outputs/test_briefing.md")
+        logger.info(f"Test briefing saved to outputs/test_briefing.md ({len(items)} items)")
         return
     
     if args.once:

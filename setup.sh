@@ -36,7 +36,7 @@ fi
 # Create necessary directories
 echo "📁 Creating directories..."
 mkdir -p logs
-mkdir -p data
+mkdir -p outputs
 
 echo ""
 echo "========================================="

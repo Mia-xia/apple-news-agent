@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   apple-news-agent:
-    build: .
+    build: ..
     container_name: apple-news-agent
     environment:
       # Copy values from your .env file
@@ -18,9 +18,9 @@ services:
       TIMEZONE: ${TIMEZONE:-UTC}
     volumes:
       # Mount for persistent logs
-      - ./logs:/app/logs
+      - ../logs:/app/logs
       # Mount briefing output
-      - ./output:/app/output
+      - ../outputs:/app/outputs
     restart: unless-stopped
     # Run on schedule in background
     command: [""]

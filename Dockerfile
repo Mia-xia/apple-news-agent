@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY agent.py config.py models.py fetchers.py formatter.py delivery.py ./
 
 # Create logs directory
-RUN mkdir -p logs
+RUN mkdir -p logs outputs
 
 # Copy .env file (mount as volume in production)
 COPY .env .
